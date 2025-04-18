@@ -14,22 +14,23 @@
         die("Connection failed" . mysqli_connect_error());
     }
 
+
+    //dynamic greeting for users
     $sql_username = "SELECT prenom FROM etudiant WHERE email = ?";
     $stmt_username = mysqli_prepare($conn, $sql_username);
     mysqli_stmt_bind_param($stmt_username,"s", $_SESSION['email']);
     mysqli_stmt_execute($stmt_username);
     $username_result = mysqli_stmt_get_result($stmt_username);
     $row_username = mysqli_fetch_assoc($username_result);
-
     echo "<h1>Welcome, {$row_username['prenom']}</h1>";
 
+    
+    //marks table
     $sql_tableau = "SELECT id_module,note FROM note WHERE id_etudiant = ? ";
     $stmt_tableau = mysqli_prepare($conn, $sql_tableau);
     mysqli_stmt_bind_param($stmt_tableau,"s", $_SESSION['email']);
     mysqli_stmt_execute($stmt_tableau);
     $result_tableau = mysqli_stmt_get_result($stmt_tableau);
-    
-    //marks table
     
     echo "<h2>Your marks table</h2>";
     echo "<table style='border: 2px solid;'>";
@@ -38,6 +39,7 @@
         <th style='border: 2px solid;'>Note</th>
         <th style='border: 2px solid;'>Resultat</th>
         </tr>";
+        
     while ($rows_tableau = mysqli_fetch_assoc($result_tableau)) {
         echo " <tr>
                 <td style='border: 2px solid;'>{$rows_tableau['id_module']}</td>
