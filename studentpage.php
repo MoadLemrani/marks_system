@@ -47,6 +47,9 @@
                 if($rows_tableau['note'] >= 12){
                     $resultat_note = 'V';
                 }
+                else if($rows_tableau['note'] == null){
+                    $resultat_note = null;
+                }
                 else {
                     $resultat_note = 'RAT';
                 }
