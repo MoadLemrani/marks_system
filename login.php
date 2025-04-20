@@ -47,4 +47,5 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {//REMARQUE: 9bl ma dir hadxi khask ch
         echo "Please enter both E-mail and password";
     }
 }
+mysqli_close($conn);
 ?>

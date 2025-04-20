@@ -42,25 +42,35 @@
         <th style='border: 2px solid;'>action</th>
         </tr>";
 
-        $sql_etudiant_info = "SELECT num,nom,prenom FROM etudiant ORDER BY num ASC";
+        $sql_etudiant_info = "SELECT num,nom,prenom,email FROM etudiant ORDER BY num ASC";
         $resultat_etudiant_info = mysqli_query($conn, $sql_etudiant_info);
 
         while ($rows_etudiant_info = mysqli_fetch_assoc($resultat_etudiant_info)) {
-            echo "<form action='manipulation_notes.php' method='post'>
+            echo "
             <tr>
                 <td style='border: 2px solid;'>{$rows_etudiant_info['num']}</td>
                 <td style='border: 2px solid;'>{$rows_etudiant_info['nom']}</td>
                 <td style='border: 2px solid;'>{$rows_etudiant_info['prenom']}</td>
-                <td style='border: 2px solid;'><label for='note'></label><input type='number' id='note' name='note'></td>
-                <td style='border: 2px solid;'><input type='submit' id='add' value='confirmer'><input type='reset' id ='mod' value='modifier'><input type='submit' id='supp' value='supprimer'></td>
+                <td style='border: 2px solid;'>
+                    <form action='manipulation_notes.php' method='post'>
+                        <label for='note'></label>
+                        <input type='number' id='note' name='note' min='0' max='20'>
+                        <input type='hidden' name='etudiant' value='{$rows_etudiant_info['email']}'>
+                        <input type='hidden' name='module' value='{$row_module_prof['nom']}'>
+                        <input type='submit' value='✅'>
+                    </form>
+                </td>
+                <td style='border: 2px solid;'>
+                    <input type='submit' id ='mod' value='modifier'>
+                    <input type='submit' id='supp' value='supprimer'>
+                </td>
             </tr>
-            </form>";
+            ";
         }
         echo "</table>";
     }
 
-
-
+    mysqli_close($conn);
     ?>
 </body>
 
