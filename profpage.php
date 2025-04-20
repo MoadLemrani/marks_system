@@ -24,6 +24,20 @@
     echo "<h1>Bienvenue, Professeur {$row_username['nom']}</h1>";
 
     //page prof
+
+    if(isset($_SESSION['manque_note'])){
+        echo"<p style='color : red'>{$_SESSION['manque_note']}</p>";
+        unset($_SESSION['manque_note']);
+    }
+    if(isset($_SESSION['note_existe_deja'])){
+        echo"<p style='color : orange'>{$_SESSION['note_existe_deja']}</p>";
+        unset($_SESSION['note_existe_deja']);
+    }
+    if(isset($_SESSION['succes'])){
+        echo"<p style='color : green'>{$_SESSION['succes']}</p>";
+        unset($_SESSION['succes']);
+    }
+
     $sql_module_prof = "SELECT nom FROM module WHERE id_prof = ?";
     $stmt_module_prof = mysqli_prepare($conn, $sql_module_prof);
     mysqli_stmt_bind_param($stmt_module_prof, "s", $_SESSION['email']);
@@ -57,12 +71,12 @@
                         <input type='number' id='note' name='note' min='0' max='20'>
                         <input type='hidden' name='etudiant' value='{$rows_etudiant_info['email']}'>
                         <input type='hidden' name='module' value='{$row_module_prof['nom']}'>
-                        <input type='submit' value='✅'>
+                        <input type='submit' title='attribuer' value='✅'>
                     </form>
                 </td>
                 <td style='border: 2px solid;'>
-                    <input type='submit' id ='mod' value='modifier'>
-                    <input type='submit' id='supp' value='supprimer'>
+                    <input type='submit' id ='mod' title='modifier' value='🔄️'>
+                    <input type='submit' id='supp' title='supprimer 'value='🗑️'>
                 </td>
             </tr>
             ";

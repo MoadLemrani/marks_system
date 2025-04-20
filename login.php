@@ -8,7 +8,7 @@ if (!$conn) {
 
 
 
-if ($_SERVER['REQUEST_METHOD'] == "POST") {//REMARQUE: 9bl ma dir hadxi khask checki wax luser 3mr lformulaire
+if ($_SERVER['REQUEST_METHOD'] === "POST") {//REMARQUE: 9bl ma dir hadxi khask checki wax luser 3mr lformulaire
 
 
     $email = $_POST['email'] ?? null;//b "?? null" ila luser khla lfield khawi PHP maghadix ysif undefiened warnins ms ay3amlo ka null
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {//REMARQUE: 9bl ma dir hadxi khask ch
         mysqli_stmt_execute($stmt);//execute
         $resultetudiant = mysqli_stmt_get_result($stmt);//getting result
 
-        if (mysqli_num_rows($resultetudiant) == 1) {//used "== 1" instead of "> 0" cuz the email is unique so it cant exist in more than 1 row
+        if (mysqli_num_rows($resultetudiant) === 1) {//used "=== 1" instead of "> 0" cuz the email is unique so it cant exist in more than 1 row
             header("Location: studentpage.php");//la kan luser etudiant atsifto lpage lmkhssa lihom
             exit();//this stops the script
         } else {
@@ -36,15 +36,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {//REMARQUE: 9bl ma dir hadxi khask ch
             mysqli_stmt_execute($stmt);
             $resultprof = mysqli_stmt_get_result($stmt);
 
-            if (mysqli_num_rows($resultprof) == 1) {
+            if (mysqli_num_rows($resultprof) === 1) {
                 header("Location: profpage.php");
                 exit();
             } else {
-                echo "E-mail or password incorrect, try again pls";
+                $_SESSION['login_error'] = '⚠️ Adresse e-mail ou mot de passe incorrect. Veuillez réessayer ⚠️';
+                header('Location: login_form.php');
+                exit();
             }
         }
     } else {
-        echo "Please enter both E-mail and password";
+        $_SESSION['manque_id'] = "⚠️ Adresse e-mail et mot de passe requis. ⚠️";
+        header('Location: login_form.php');
+        exit();
     }
 }
 mysqli_close($conn);
