@@ -24,17 +24,17 @@
     echo "<h1>Bienvenue, Professeur {$row_username['nom']}</h1>";
 
     //page prof
-
-    if(isset($_SESSION['manque_note'])){
-        echo"<p style='color : red'>{$_SESSION['manque_note']}</p>";
+    
+    if (isset($_SESSION['manque_note'])) {
+        echo "<p style='color : red'>{$_SESSION['manque_note']}</p>";
         unset($_SESSION['manque_note']);
     }
-    if(isset($_SESSION['note_existe_deja'])){
-        echo"<p style='color : orange'>{$_SESSION['note_existe_deja']}</p>";
+    if (isset($_SESSION['note_existe_deja'])) {
+        echo "<p style='color : orange'>{$_SESSION['note_existe_deja']}</p>";
         unset($_SESSION['note_existe_deja']);
     }
-    if(isset($_SESSION['succes'])){
-        echo"<p style='color : green'>{$_SESSION['succes']}</p>";
+    if (isset($_SESSION['succes'])) {
+        echo "<p style='color : green'>{$_SESSION['succes']}</p>";
         unset($_SESSION['succes']);
     }
 
@@ -67,16 +67,30 @@
                 <td style='border: 2px solid;'>{$rows_etudiant_info['prenom']}</td>
                 <td style='border: 2px solid;'>
                     <form action='manipulation_notes.php' method='post'>
-                        <label for='note'></label>
-                        <input type='number' id='note' name='note' min='0' max='20'>
                         <input type='hidden' name='etudiant' value='{$rows_etudiant_info['email']}'>
                         <input type='hidden' name='module' value='{$row_module_prof['nom']}'>
+                        <label for='note'></label>";
+
+            //bax kol mra ydkhl lprof yxof la note li 3ta l etudiant            
+            $sql_affiche_note_tjrs = "SELECT note FROM note WHERE id_etudiant = '{$rows_etudiant_info['email']}' AND id_module = '{$row_module_prof['nom']}'";
+            $resultat_note_tjrs = mysqli_query($conn, $sql_affiche_note_tjrs);
+            $row_note = mysqli_fetch_assoc($resultat_note_tjrs);
+            $note_affiche = $row_note['note'] ?? null;// bax maytl3xliya warning dyal null
+
+                        echo "
+                        <input type='number' id='note' name='note' min='0' max='20' value='{$note_affiche}'>
                         <input type='submit' title='attribuer' value='✅'>
+                        
                     </form>
                 </td>
                 <td style='border: 2px solid;'>
-                    <input type='submit' id ='mod' title='modifier' value='🔄️'>
-                    <input type='submit' id='supp' title='supprimer 'value='🗑️'>
+                    <form action ='edit.php' method='post'>
+                        <input type='submit' id ='mod' title='modifier' value='🔄️'>
+                    </form>
+
+                    <form action='delte.php' method='post'>
+                        <input type='submit' id='supp' title='supprimer 'value='🗑️'>
+                    </form>
                 </td>
             </tr>
             ";
