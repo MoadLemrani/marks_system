@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -12,6 +12,13 @@
     $conn = mysqli_connect('localhost', 'root', '', 'marks_system_db');
     if (!$conn) {
         die("Connection failed" . mysqli_connect_error());
+    }
+
+
+    if ($_SESSION['email'] === null) {
+        $_SESSION['error_auth_prof'] = "Vous ne pouvez pas accéder à cette page sans vous connecter à votre compte.";
+        header("Location: login_form.php");
+        exit();
     }
 
     //dynamic greeting
@@ -36,6 +43,14 @@
     if (isset($_SESSION['succes'])) {
         echo "<p style='color : green'>{$_SESSION['succes']}</p>";
         unset($_SESSION['succes']);
+    }
+    if (isset($_SESSION['error_no_note'])){
+        echo "<p style ='color : orange;'>{$_SESSION['error_no_note']}</p>";
+        unset($_SESSION['error_no_note']);
+    }
+    if (isset($_SESSION['deletion_succes'])) {
+        echo "<p style='color : green'>{$_SESSION['deletion_succes']}</p>";
+        unset($_SESSION['deletion_succes']);
     }
 
     $sql_module_prof = "SELECT nom FROM module WHERE id_prof = ?";
@@ -76,19 +91,17 @@
             $resultat_note_tjrs = mysqli_query($conn, $sql_affiche_note_tjrs);
             $row_note = mysqli_fetch_assoc($resultat_note_tjrs);
             $note_affiche = $row_note['note'] ?? null;// bax maytl3xliya warning dyal null
-
-                        echo "
-                        <input type='number' id='note' name='note' min='0' max='20' value='{$note_affiche}'>
-                        <input type='submit' title='attribuer' value='✅'>
-                        
-                    </form>
+    
+            echo "
+                        <input type='number' id='note' name='note' min='0' max='20' value='{$note_affiche}'>        
                 </td>
                 <td style='border: 2px solid;'>
-                    <form action ='edit.php' method='post'>
-                        <input type='submit' id ='mod' title='modifier' value='🔄️'>
+                        <input type='submit' title='attribuer' value='✅'>    
                     </form>
-
-                    <form action='delte.php' method='post'>
+                    <form action='delete.php' method='post'>
+                        <input type='hidden' name='etudiant' value='{$rows_etudiant_info['email']}'>
+                        <input type='hidden' name='module' value='{$row_module_prof['nom']}'>
+                        <input type='hidden' name='note' value='{$note_affiche}'>
                         <input type='submit' id='supp' title='supprimer 'value='🗑️'>
                     </form>
                 </td>
@@ -97,6 +110,7 @@
         }
         echo "</table>";
     }
+
 
     mysqli_close($conn);
     ?>

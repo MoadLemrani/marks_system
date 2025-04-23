@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -12,6 +12,12 @@
     $conn = mysqli_connect('localhost', 'root', '', 'marks_system_db');
     if (!$conn) {
         die("Connection failed" . mysqli_connect_error());
+    }
+
+    if ($_SESSION['email'] === null) {
+        $_SESSION['error_auth_student'] = "Vous ne pouvez pas accéder à cette page sans vous connecter à votre compte.";
+        header("Location: login_form.php");
+        exit();
     }
 
 

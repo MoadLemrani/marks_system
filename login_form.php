@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -11,13 +11,23 @@
     <?php
     session_start();
     if (isset($_SESSION['login_error'])) {
-        echo "<p style='color : red'>{$_SESSION['login_error']}</p>";
+        echo "<p style='color : red;'>{$_SESSION['login_error']}</p>";
         unset($_SESSION['login_error']);
     }
     if (isset($_SESSION['manque_id'])) {
-        echo "<p style='color : red'>{$_SESSION['manque_id']}</p>";
+        echo "<p style='color : red;'>{$_SESSION['manque_id']}</p>";
         unset($_SESSION['manque_id']);
     }
+    if(isset($_SESSION['error_auth_prof'])){
+        echo"<p style='color : red;'>{$_SESSION['error_auth_prof']}</p>";
+        unset($_SESSION['error_auth_prof']);
+    }
+    if(isset($_SESSION['error_auth_student'])){
+        echo"<p style='color : red;'>{$_SESSION['error_auth_student']}</p>";
+        unset($_SESSION['error_auth_student']);
+    }
+
+
     ?>
     <form action="login.php" method="post">
         <label for="email">E-mail académique :</label><br>

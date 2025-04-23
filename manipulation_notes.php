@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $etudiant = $_POST['etudiant'] ?? null;
     $module = $_POST['module'] ?? null;
 
-    if ($note !== null) {
+    if ($note != null) {
         $check_etudiant_a_note = "SELECT id_module,id_etudiant FROM note WHERE id_module = '{$module}' AND id_etudiant = '{$etudiant}'";
         $result_existance = mysqli_query($conn, $check_etudiant_a_note);
         if (mysqli_num_rows($result_existance)) {
