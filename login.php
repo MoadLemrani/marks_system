@@ -2,7 +2,7 @@
 session_start();//katbda wa7d session li katkhli PHP yb9a mtacki data d l user ila bghiti tst3mlha f xi page okhra 
 $conn = mysqli_connect("localhost", "root", "", "marks_system_db");
 if (!$conn) {
-    die("Connection failed : " . mysqli_connect_error());
+    die("Échec de la connexion." . mysqli_connect_error());
 }
 
 
@@ -40,13 +40,13 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {//REMARQUE: 9bl ma dir hadxi khask c
                 header("Location: profpage.php");
                 exit();
             } else {
-                $_SESSION['login_error'] = '⚠️ Adresse e-mail ou mot de passe incorrect. Veuillez réessayer ⚠️';
+                $_SESSION['login_error'] = 'Adresse e-mail ou mot de passe incorrect. Veuillez réessayer';
                 header('Location: login_form.php');
                 exit();
             }
         }
     } else {
-        $_SESSION['manque_id'] = "⚠️ Adresse e-mail et mot de passe requis. ⚠️";
+        $_SESSION['manque_id'] = "Adresse e-mail et mot de passe requis.";
         header('Location: login_form.php');
         exit();
     }

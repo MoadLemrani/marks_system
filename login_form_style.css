@@ -1,0 +1,95 @@
+:root{
+    --first-color: #2c3e50;
+    --second-color: #1a252f;
+    --error-color: #e74c3c;
+    --success-color: #2ecc71;
+    --border-radius: 6px;
+    --box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+.login_container{
+    background-color: white;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    width: 100%;
+    max-width: 400px;
+}
+.logo{
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+.logo img{
+    height: 100px;
+}
+h1{
+    color: var(--first-color);
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+.error_messages{
+    color: var(--error-color);
+    background-color: #fdecea;
+    padding: 0.8rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--error-color);
+    font-size:0.9rem;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.form_group{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+label{
+    color: var(--first-color);
+    font-weight: 500;
+    font-size: 1rem;
+}
+input{
+    padding:0.8rem;
+    border:1px solid #ddd;
+    border-radius:var(--border-radius);
+    font-size:1rem;
+    transition: border 0.3s ease;
+}
+input:focus{
+    outline: none;
+    border-color: var(--first-color);
+    box-shadow:0 0 0 2px rgba(44,62,80,0.2);/*mni kanzid f x wla y katmxi dik lglow*/
+}
+button{
+    background-color:var(--first-color);
+    color: white;
+    border:none;
+    padding: 0.8rem;
+    border-radius:var(--border-radius);
+    font-size:1rem;
+    font-weight:600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 0.5rem;
+}
+button:hover{
+    background-color: var(--second-color);
+}
+@media(max-width: 480px){
+    .login_container{
+        padding: 1rem;
+    }
+}

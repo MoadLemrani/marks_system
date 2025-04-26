@@ -11,7 +11,7 @@
     session_start();
     $conn = mysqli_connect('localhost', 'root', '', 'marks_system_db');
     if (!$conn) {
-        die("Connection failed" . mysqli_connect_error());
+        die("Échec de la connexion." . mysqli_connect_error());
     }
 
 

@@ -11,7 +11,7 @@
     session_start();
     $conn = mysqli_connect('localhost', 'root', '', 'marks_system_db');
     if (!$conn) {
-        die("Connection failed" . mysqli_connect_error());
+        die("Échec de la connexion." . mysqli_connect_error());
     }
 
     if ($_SESSION['email'] === null) {
@@ -28,7 +28,7 @@
     mysqli_stmt_execute($stmt_username);
     $username_result = mysqli_stmt_get_result($stmt_username);
     $row_username = mysqli_fetch_assoc($username_result);
-    echo "<h1>Welcome, {$row_username['prenom']}</h1>";
+    echo "<h1>Bienvenue, {$row_username['prenom']}</h1>";
 
 
     //marks table
@@ -41,7 +41,7 @@
 
 
     if (!mysqli_num_rows($result_tableau)) {
-        echo "<h4>il n ya pas des nouveautes a ce moment</h4>";
+        echo "<h4>Il n'y a pas de nouveautés pour le moment.</h4>";
     } else {
         echo "<h2>Your marks table</h2>";
         echo "<table style='border: 2px solid;'>";
