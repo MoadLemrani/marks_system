@@ -25,4 +25,5 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
         echo"Erreur :".mysqli_error($conn);
     }
 }
+mysqli_close($conn);//matnas hadi ajmi bax tsd lconnexion good practice w kada
 ?>
