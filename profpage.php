@@ -3,7 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Prof page</title>
+    <meta name="viewport" content="width=device-width , initial-scale = 1.0">
+    <link rel="icon" href="images/GI_logo.png">
+    <link rel="stylesheet" href="prof_page_styles.css">
+    <title>Espace Professeur</title>
 </head>
 
 <body>
@@ -33,23 +36,23 @@
     //page prof
     
     if (isset($_SESSION['manque_note'])) {
-        echo "<p style='color : red'>{$_SESSION['manque_note']}</p>";
+        echo "<div class='message error'>{$_SESSION['manque_note']}</div>";
         unset($_SESSION['manque_note']);
     }
     if (isset($_SESSION['note_existe_deja'])) {
-        echo "<p style='color : orange'>{$_SESSION['note_existe_deja']}</p>";
+        echo "<div class='message warning'>{$_SESSION['note_existe_deja']}</div>";
         unset($_SESSION['note_existe_deja']);
     }
     if (isset($_SESSION['succes'])) {
-        echo "<p style='color : green'>{$_SESSION['succes']}</p>";
+        echo "<div class='message success'>{$_SESSION['succes']}</div>";
         unset($_SESSION['succes']);
     }
     if (isset($_SESSION['error_no_note'])){
-        echo "<p style ='color : orange;'>{$_SESSION['error_no_note']}</p>";
+        echo "<div class='message warning'>{$_SESSION['error_no_note']}</div>";
         unset($_SESSION['error_no_note']);
     }
     if (isset($_SESSION['deletion_succes'])) {
-        echo "<p style='color : green'>{$_SESSION['deletion_succes']}</p>";
+        echo "<div class='message success'>{$_SESSION['deletion_succes']}</div>";
         unset($_SESSION['deletion_succes']);
     }
 
@@ -62,13 +65,13 @@
     while ($row_module_prof = mysqli_fetch_assoc($resultat_module_prof)) {
         echo "<h2>Module: {$row_module_prof['nom']}</h2>";
         echo "<h3>votre etudiants : </h3>";
-        echo "<table style='border: 2px solid;'>";
+        echo "<table>";
         echo "<tr>
-        <th style='border: 2px solid;'>N°</th>
-        <th style='border: 2px solid;'>Nom</th>
-        <th style='border: 2px solid;'>Prenom</th>
-        <th style='border: 2px solid;'>Note</th>
-        <th style='border: 2px solid;'>action</th>
+        <th>N°</th>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Note</th>
+        <th>action</th>
         </tr>";
 
         $sql_etudiant_info = "SELECT num,nom,prenom,email FROM etudiant ORDER BY num ASC";
@@ -77,10 +80,10 @@
         while ($rows_etudiant_info = mysqli_fetch_assoc($resultat_etudiant_info)) {
             echo "
             <tr>
-                <td style='border: 2px solid;'>{$rows_etudiant_info['num']}</td>
-                <td style='border: 2px solid;'>{$rows_etudiant_info['nom']}</td>
-                <td style='border: 2px solid;'>{$rows_etudiant_info['prenom']}</td>
-                <td style='border: 2px solid;'>
+                <td>{$rows_etudiant_info['num']}</td>
+                <td>{$rows_etudiant_info['nom']}</td>
+                <td>{$rows_etudiant_info['prenom']}</td>
+                <td>
                     <form action='manipulation_notes.php' method='post'>
                         <input type='hidden' name='etudiant' value='{$rows_etudiant_info['email']}'>
                         <input type='hidden' name='module' value='{$row_module_prof['nom']}'>
@@ -95,14 +98,14 @@
             echo "
                         <input type='number' id='note' name='note' min='0' max='20' value='{$note_affiche}'>        
                 </td>
-                <td style='border: 2px solid;'>
+                <td class='actions'>
                         <input type='submit' title='attribuer' value='✅'>    
                     </form>
                     <form action='delete.php' method='post'>
                         <input type='hidden' name='etudiant' value='{$rows_etudiant_info['email']}'>
                         <input type='hidden' name='module' value='{$row_module_prof['nom']}'>
                         <input type='hidden' name='note' value='{$note_affiche}'>
-                        <input type='submit' id='supp' title='supprimer 'value='🗑️'>
+                        <input type='submit' id='supp' title='supprimer' value='🗑️'>
                     </form>
                 </td>
             </tr>
