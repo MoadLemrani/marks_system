@@ -1,0 +1,130 @@
+:root{
+    --first-color:#2c3e50;
+    --second-color:#34495e;
+    --accent-color:#e74c3c;
+    --light-color:#e74c3C;
+    --succes-color:#27ae60;
+    --warning-color:#F39C12;
+    --error-color:#E74C3C;
+    --border-radius:4px;
+    --box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+body{
+    font-family:'SEgoe UI',Tahoma,Geneva,Verdana,sans-serif;
+    line-height:1.6;
+    color:#333;
+    background-color:#f5f5f5;
+    margin:0;
+    padding: 20px;
+}
+h1{
+    color: var(--first-color);
+    border-bottom:2px solid var(--second-color);
+    padding-bottom:10px;
+    margin-bottom:20px;
+}
+h2{
+    color: var(--second-color);
+    margin-top: 30px;
+    background-color:#EAF2F8;
+    padding:10px;
+    border-radius:var(--border-radius);
+}
+h3{
+    color:var(--second-color);
+    margin:15px 0;
+}
+.message{
+    padding: 10px 15px;
+    margin:15px 0;
+    border-radius: var(--border-radius);
+    font-weight:500;
+}
+.error{
+    background-color: #fdecea;
+    color: var(--error-color);
+    border-left: 4px solid var(--error-color);
+}
+.warning{
+    background-color:#fef5e7;
+    color: var(--warning-color);
+    border-left:4px solid var(--warning-color);
+}
+.success{
+    background-color:#E8F8F0;
+    color:var(--succes-color);
+    border-left:4px solid var(--succes-color);
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow:var(--box-shadow);
+    background-color: white;
+}
+th{
+    background-color:var(--first-color);
+    color:white;
+    padding:12px;
+    text-align:left;
+}
+td{
+    padding:10px 12px;
+    border-bottom: 1px solid #ddd;
+}
+tr:nth-child(even){
+    background-color:#F9F9F9;
+}
+tr:hover{
+    background-color:#F1F1F1;
+}
+input[type="number"]{
+    width:60px;
+    padding:6px;
+    border:1px solid #ddd;
+    border-radius: var(--border-radius);
+}
+input[type="submit"]{
+    background:none;
+    border:none;
+    cursor:pointer;
+    font-size: 1.1em;
+    padding: 5px 10px;
+    transition:transform 0.2s;/*prepares the input for the transform*/
+}
+input[type="submit"]:hover{
+    transform: scale(1.1);/*the input grow 10% bigger when hovering*/
+}
+.actions{
+    display: flex;
+    gap:10px;
+}
+form{
+    display: inline;
+    margin:0;
+}
+@media(max-width: 768px){
+    body{
+        padding:10px;
+    }
+    h1,h2,h3{
+        font-size: 1.2em;
+    }
+    table{
+        display: block;
+        overflow-x: auto;/*let users scroll side-to-side if needed*/
+        max-width:900px;
+        font-size:0.9em;
+    }
+    .actions{
+        flex-direction: column;
+        gap:5px;
+    }
+    input[type="number"]{
+        width:100%;
+    }
+    input[type="submit"]{
+        width:100%;
+        font-size: 1em;
+    }
+}
