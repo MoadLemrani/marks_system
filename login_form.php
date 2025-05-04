@@ -14,7 +14,7 @@
         <div class="logo">
             <img src="images/GI_logo.png">
         </div>
-           
+
         <h1>Connexion</h1>
         <?php
         session_start();
@@ -54,6 +54,9 @@
             <div class="form_group">
                 <label for="password">Mot de passe</label>
                 <input type="password" id="password" name="password" placeholder="••••••••" required>
+            </div>
+            <div class="forgot_password">
+                <a href="forgot_password.php" target="_blank">Oublié votre mot de passe?</a>
             </div>
             <button type="submit">Se connecter</button>
         </form>
