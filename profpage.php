@@ -78,7 +78,15 @@
         $resultat_etudiant_info = mysqli_query($conn, $sql_etudiant_info);
 
         while ($rows_etudiant_info = mysqli_fetch_assoc($resultat_etudiant_info)) {
-            echo "
+
+
+            //bax kol mra ydkhl lprof yxof la note li 3ta l etudiant            
+            $sql_affiche_note_tjrs = "SELECT note FROM note WHERE id_etudiant = '{$rows_etudiant_info['email']}' AND id_module = '{$row_module_prof['nom']}'";
+            $resultat_note_tjrs = mysqli_query($conn, $sql_affiche_note_tjrs);
+            $row_note = mysqli_fetch_assoc($resultat_note_tjrs);
+            $note_affiche = $row_note['note'] ?? null;// bax maytl3xliya warning dyal null
+
+            echo"
             <tr>
                 <td>{$rows_etudiant_info['num']}</td>
                 <td>{$rows_etudiant_info['nom']}</td>
@@ -87,15 +95,6 @@
                     <form action='manipulation_notes.php' method='post'>
                         <input type='hidden' name='etudiant' value='{$rows_etudiant_info['email']}'>
                         <input type='hidden' name='module' value='{$row_module_prof['nom']}'>
-                        <label for='note'></label>";
-
-            //bax kol mra ydkhl lprof yxof la note li 3ta l etudiant            
-            $sql_affiche_note_tjrs = "SELECT note FROM note WHERE id_etudiant = '{$rows_etudiant_info['email']}' AND id_module = '{$row_module_prof['nom']}'";
-            $resultat_note_tjrs = mysqli_query($conn, $sql_affiche_note_tjrs);
-            $row_note = mysqli_fetch_assoc($resultat_note_tjrs);
-            $note_affiche = $row_note['note'] ?? null;// bax maytl3xliya warning dyal null
-    
-            echo "
                         <input type='number' id='note' name='note' min='0' max='20' value='{$note_affiche}'>        
                 </td>
                 <td class='actions'>
