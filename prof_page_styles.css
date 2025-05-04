@@ -61,6 +61,7 @@ table{
     margin: 20px 0;
     box-shadow:var(--box-shadow);
     background-color: white;
+    table-layout: fixed;
 }
 th{
     background-color:var(--first-color);
@@ -71,6 +72,20 @@ th{
 td{
     padding:10px 12px;
     border-bottom: 1px solid #ddd;
+}
+/* Set column widths */
+th:nth-child(1), td:nth-child(1) { /* N° column */
+    width: 8%;
+}
+th:nth-child(2), td:nth-child(2), /* Nom column */
+th:nth-child(3), td:nth-child(3) { /* Prenom column */
+    width: 20%;
+}
+th:nth-child(4), td:nth-child(4) { /* Note column */
+    width: 15%;
+}
+th:nth-child(5), td:nth-child(5) { /* Action column */
+    width: 25%;
 }
 tr:nth-child(even){
     background-color:#F9F9F9;
@@ -91,16 +106,18 @@ input[type="submit"]{
     font-size: 1.1em;
     padding: 5px 10px;
     transition:transform 0.2s;/*prepares the input for the transform*/
+    display: inline-block;
 }
 input[type="submit"]:hover{
     transform: scale(1.1);/*the input grow 10% bigger when hovering*/
 }
 .actions{
     display: flex;
+    justify-content: space-around;
     gap:10px;
 }
 form{
-    display: inline;
+    display: inline-block;
     margin:0;
 }
 @media(max-width: 768px){
@@ -113,11 +130,13 @@ form{
     table{
         display: block;
         overflow-x: auto;/*let users scroll side-to-side if needed*/
-        max-width:900px;
+        max-width:100%;
         font-size:0.9em;
+        table-layout: auto;/*allow responsive behaviour*/
     }
     .actions{
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: space-around;
         gap:5px;
     }
     input[type="number"]{
