@@ -3,7 +3,7 @@
     --second-color: #2980b9;
     --succes-color: #2ecc71;
     --warning-color: #2980b9;
-    --danger-color: #e74c3c;
+    --danger-color: #999999;
     --light-color: #ecf0f1;
     --dark-color:#2c3e50;
     --border-radius:6px;
@@ -67,7 +67,7 @@ tr:hover{
     color: var(--succes-color);
     font-weight: bold;
 }
-.ratt{
+.NV{
     color:var(--danger-color);
     font-weight: bold;
 }
