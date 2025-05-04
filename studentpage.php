@@ -63,15 +63,13 @@
                 
 
                 $resultat_note = null;
-                $resultat_class='';//class dyal lresultat(v ou rat) bax nstylihom
+                $resultat_class='';//class dyal lresultat(v ou nv) bax nstylihom
                 if ($rows_tableau['note'] >= 12) {
                     $resultat_note = 'Validé';
                     $resultat_class = 'valide';
-                } else if ($rows_tableau['note'] == null) {//had str kant 3ndo fa2ida mni knt n affichi swa kant n9ta wla la
-                    $resultat_note = null;
                 } else {
-                    $resultat_note = 'Rattrapage';
-                    $resultat_class = 'ratt';
+                    $resultat_note = 'Non validé';
+                    $resultat_class = 'NV';
                 }
                 echo "<tr>
                     <td>{$rows_tableau['id_module']}</td>
