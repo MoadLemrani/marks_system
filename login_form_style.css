@@ -88,6 +88,15 @@ button{
 button:hover{
     background-color: var(--second-color);
 }
+.forgot_password a{
+    color: #4682b4;
+    text-decoration: none;/*remove element decoration like underlines*/
+    font-size: 1rem;
+}
+.forgot_password a:hover{
+    text-decoration: underline;
+    font-weight: 600;
+}
 @media(max-width: 480px){
     .login_container{
         padding: 1rem;
